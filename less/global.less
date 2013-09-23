@@ -1,12 +1,82 @@
 @import 'palette.less';
+@import 'elements.less';
+@import 'fonts.less';
 
 .navigation {
-	height: 60px;
-	background: url(http://subtlepatterns.com/patterns/gray_jean.png);
-}
+	.gradient(@github_grey_1, @github_grey_1, @github_grey_2);
+	.box-shadow(0 0 1px @dark_grey);
+	.navbar {
+		.rounded(none) !important;
+		border: none;
+		background: none;
+		margin-bottom: 0;
+		min-height: 0;
+	}
+	.navbar-brand {
+		.box-sizing();
+		.font-size(1.6);
+		line-height: 0;
+		padding: 12px 15px 11px;
+	}
+	ul {
+		margin: 0;
+		overflow: auto;
+		padding: 0;
+		li {
+			float: left;
+			list-style: none;
+			list-style-image: none;
+			list-style-type: none;
+			a {
+				border-left: 1px solid #FFF;
+				border-right: 1px solid @github_grey_3;
+				.box-sizing();
+				color: @grey;
+				display: inline-block;
+				.font-size(1.4);
+				font-weight: 600;
+				padding: 10px 8px;
+				text-decoration: none;
+				.transition();
+				.icon-home {
+					margin-right: 3px;
+				}
+			}
+			&:first-child {
+				padding-left: 0;
+				a {
+					border-left: none;
+					padding-left: 0;
+				}
+			}
+			&:last-child a {
+				border-right: none;
+			}
+			&:hover {
+				a {
+					color: @github_blue;
+					.transition();
+				}
+			}
+		}
+	}
+	.social-btns {
+		ul {
+			float: right;
+			li {
 
-.site-name {
-	a {
-		color: @primary !important;
+			}
+		}
+	}
+}
+.site-header {
+	margin-top: 20px;
+	.logo {
+		.box-sizing();
+		padding: 5px;
+		.box-shadow(0 0 1px @dark_grey);
+		img {
+			max-width: 100%;
+		}
 	}
 }

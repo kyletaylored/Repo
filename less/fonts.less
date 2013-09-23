@@ -1,0 +1,14 @@
+@import 'palette.less';
+
+h1,h2,h3,h4,h5 {
+	color: @dark_grey;
+	a {
+		color: @dark_grey;
+		.transition(0.1s);
+		&:hover {
+			color: @github_blue;
+			text-decoration: none;
+			.transition(0.1s);
+		}
+	}
+}
