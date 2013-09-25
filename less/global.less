@@ -193,37 +193,9 @@ hr {
 			.box-sizing();
 			padding: 3px 10px;
 		}
-		.article-footer{
+		.article-footer {
 			overflow: auto;
 			padding: 0 10px 5px;
-			.tags {
-				.box-sizing();
-				float: left;
-				overflow: auto;
-				.tag {
-					display: inline-block;
-					float: left;
-					margin-right: 5px;
-					a {
-						color: #000;
-						display: block;
-						padding: 3px 5px;
-						background: @commit_green;
-						.font-size(1);
-						font-family: Monaco, Courier, monospace;
-						&:before {
-							content: "+ "
-						}
-						&:hover {
-							background: @commit_red;
-							text-decoration: none;
-							&:before {
-								content: "- ";
-							}
-						}
-					}
-				}
-			}
 
 			.post-hash {
 				font-family: Monaco, Courier, monospace;
@@ -269,7 +241,36 @@ hr {
 	}
 }
 
+// Tags
+.tags {
+	.box-sizing();
+	float: left;
+	overflow: auto;
+	.tag {
+		display: inline-block;
+		float: left;
+		margin-right: 5px;
+		a {
+			color: #000;
+			display: block;
+			padding: 3px 5px;
+			background: @commit_green;
+			.font-size(1);
+			font-family: Monaco, Courier, monospace;
+			&:before {
+				content: "+ "
+			}
+			&:hover {
+				background: @commit_red;
+				text-decoration: none;
+				&:before {
+					content: "- ";
+				}
+			}
+		}
+	}
 
+}
 
 
 

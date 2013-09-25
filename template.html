@@ -275,9 +275,13 @@
 						<section class="content">
 							{{ post.content }}
 							{% if post.tags %}
-							<div class="tags">
-								{{ post.tags|format_tags(delimiter=' ') }}
-							</div>
+								<div class="article-footer content">
+									<div class="tags">
+										{% for tag in post.tags %}
+										<div class="tag">{{ tag|format_tag }}</div>
+										{% endfor %}
+									</div>
+								</div>
 							{% endif %}
 						</section>
 						{% if site.disqus %}
