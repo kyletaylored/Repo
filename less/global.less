@@ -2,6 +2,10 @@
 @import 'elements.less';
 @import 'fonts.less';
 
+hr {
+	margin: 10px 0;
+}
+
 .navigation {
 	.gradient(@github_grey_1, @github_grey_1, @github_grey_2);
 	.box-shadow(0 0 1px @dark_grey);
@@ -79,4 +83,197 @@
 			max-width: 100%;
 		}
 	}
+	ul.blog-stats {
+		margin: 0;
+		overflow: auto;
+		padding: 0;
+		li {
+			float: left;
+			list-style: none;
+			list-style-image: none;
+			list-style-type: none;
+			text-align: center;
+			width: 33%;
+			.value {
+				.font-size(2.2);
+				font-weight: 600;
+				color: @dark_grey;
+			}
+			.type {
+				.font-size(1.2);
+				color: @grey;
+				text-transform: lowercase;
+				font-weight: 500;
+			}
+		}
+	}
+	ul.personal-stats {
+		margin: 0;
+		overflow: auto;
+		padding: 0;
+		li {
+			list-style: none;
+			list-style-image: none;
+			list-style-type: none;
+			&.outer-bar {
+				width: 100%;
+				background: lighten(@grey, 40%);
+				margin-bottom: 10px;
+				&:hover {
+				}
+			}
+			.inner-bar {
+				background: @green;
+				.box-sizing();
+				padding: 3px 5px;
+				font-weight: 600;
+				.transition(0.5s);
+				&:hover {
+					width: 100% !important;
+					.transition(0.5s);
+				}
+			}
+		}
+	}
 }
+
+.style-font-tag {
+	font-family: Monaco, Courier, monospace;
+}
+
+// Post Summary
+.posts {
+	.summary {
+		margin: 10px 0;
+		.rounded(5px);
+		.background-clip();
+		border: 1px solid @github_grey_4;
+		.bordered(@github_grey_4, @github_grey_4, @github_grey_4, @github_grey_4);
+
+		.article-header {
+			.gradient(@github_fade_1, @github_fade_1, @github_fade_2);
+			border-bottom: 1px solid @github_grey_4;
+			.box-sizing();
+			padding: 6px 10px;
+			display: block;
+			h2.title {
+				.font-size(1.6);
+				margin: 0;
+				overflow: auto;
+				a {
+					display: inline-block;
+					float: left;
+					max-width: 90%;
+					line-height: 1.4em;
+				}
+				.article-icon {
+					display: inline-block;
+					float: right;
+				}
+			}
+
+		}
+		.article-info {
+			.box-sizing();
+			clear: both;
+			overflow: auto;
+			padding: 3px 10px;
+			.post-date {
+				line-height: 1em;
+			}
+			.post-date {
+				//font-family: Monaco, Courier, monospace;
+				.font-size(1.2);
+				font-weight: 500;
+				text-transform: lowercase;
+				padding: 6px 0 0;
+			}
+		}
+		.desc {
+			.box-sizing();
+			padding: 3px 10px;
+		}
+		.article-footer{
+			overflow: auto;
+			padding: 0 10px 5px;
+			.tags {
+				.box-sizing();
+				float: left;
+				overflow: auto;
+				.tag {
+					display: inline-block;
+					float: left;
+					margin-right: 5px;
+					a {
+						color: #000;
+						display: block;
+						padding: 3px 5px;
+						background: @commit_green;
+						.font-size(1);
+						font-family: Monaco, Courier, monospace;
+						&:before {
+							content: "+ "
+						}
+						&:hover {
+							background: @commit_red;
+							text-decoration: none;
+							&:before {
+								content: "- ";
+							}
+						}
+					}
+				}
+			}
+
+			.post-hash {
+				font-family: Monaco, Courier, monospace;
+				float:right;
+				.font-size(1.2);
+				line-height: 1em;
+
+				.article-read-more {
+					border: 1px solid @github_grey_4;
+					.box-sizing();
+					color: @grey;
+					float: right;
+					.gradient(#f2f5f6, #f2f5f6, #eaf4f8);
+					padding: 5px;
+					.rounded(3px);
+					vertical-align: bottom;
+					&:hover {
+						text-decoration: none;
+						border-color: @yellow;
+						.gradient(lighten(@yellow, 30%), lighten(@yellow, 5%), lighten(@yellow, 30%));
+						.hash-arrow {
+							background-color: lighten(@yellow, 30%);
+							border-color: lighten(@grey, 20%);
+							color: lighten(@grey, 20%);
+						}
+					}
+				}
+				.hash-arrow {
+					background: lighten(@grey, 90%);
+					border: 1px solid lighten(@grey, 10%);
+					color: lighten(@grey, 10%);
+					display: inline-block;
+					.font-size(0.8);
+					height: 10px;
+					padding: 0 9px 12px 3px;
+					.rounded(100%);
+					text-align: center;
+					vertical-align: middle;
+					width: 10px;
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
