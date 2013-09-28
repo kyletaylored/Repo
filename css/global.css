@@ -5,19 +5,25 @@
     More info at: http://lesselements.com
   ---------------------------------------------------*/
 /* --- Added Mixins --- */
-h1,
-h2,
+h1 {
+  font-size: 16px;
+  font-size: 1.6rem;
+}
+h2 {
+  font-size: 14px;
+  font-size: 1.4rem;
+}
 h3,
 h4,
 h5 {
-  color: #333333;
+  font-size: 12px;
+  font-size: 1.2rem;
 }
 h1 a,
 h2 a,
 h3 a,
 h4 a,
 h5 a {
-  color: #333333;
   -webkit-transition: all 0.1s ease-out;
   -moz-transition: all 0.1s ease-out;
   -o-transition: all 0.1s ease-out;
@@ -28,12 +34,31 @@ h2 a:hover,
 h3 a:hover,
 h4 a:hover,
 h5 a:hover {
-  color: #4183c4;
-  text-decoration: none;
   -webkit-transition: all 0.1s ease-out;
   -moz-transition: all 0.1s ease-out;
   -o-transition: all 0.1s ease-out;
   transition: all 0.1s ease-out;
+}
+/* 
+Poor Man's Reset
+CSSresetr.com
+*/
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+html {
+  font-size: 1em;
+}
+body {
+  font-size: 100%;
+  color: #666666;
+}
+a img,
+:link img,
+:visited img {
+  border: 0;
 }
 hr {
   margin: 10px 0;
@@ -63,8 +88,6 @@ hr {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  font-size: 16px;
-  font-size: 1.6rem;
   line-height: 0;
   padding: 12px 15px 11px;
 }
@@ -88,8 +111,6 @@ hr {
   box-sizing: border-box;
   color: #777777;
   display: inline-block;
-  font-size: 14px;
-  font-size: 1.4rem;
   font-weight: 600;
   padding: 10px 8px;
   text-decoration: none;
@@ -203,17 +224,6 @@ hr {
 }
 .posts .summary {
   margin: 10px 0;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  -moz-background-clip: padding-box;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  border: 1px solid #d5d5d5;
-  border-top: solid 1px #d5d5d5;
-  border-left: solid 1px #d5d5d5;
-  border-right: solid 1px #d5d5d5;
-  border-bottom: solid 1px #d5d5d5;
 }
 .posts .summary .article-header {
   background: #eaeaea;
@@ -222,7 +232,22 @@ hr {
   background: -moz-linear-gradient(center bottom, #eaeaea 0%, #fafafa 100%);
   background: -o-linear-gradient(#fafafa, #eaeaea);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fafafa', endColorstr='#eaeaea', GradientType=0);
-  border-bottom: 1px solid #d5d5d5;
+  border: 1px solid #d5d5d5;
+  -webkit-border-top-right-radius: 4px;
+  -webkit-border-bottom-right-radius: 0;
+  -webkit-border-bottom-left-radius: 0;
+  -webkit-border-top-left-radius: 4px;
+  -moz-border-radius-topright: 4px;
+  -moz-border-radius-bottomright: 0;
+  -moz-border-radius-bottomleft: 0;
+  -moz-border-radius-topleft: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 4px;
+  -moz-background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
   -ms-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -231,8 +256,6 @@ hr {
   display: block;
 }
 .posts .summary .article-header h2.title {
-  font-size: 16px;
-  font-size: 1.6rem;
   margin: 0;
   overflow: auto;
 }
@@ -246,93 +269,87 @@ hr {
   display: inline-block;
   float: right;
 }
-.posts .summary .article-info {
+.posts .summary .article-content {
   -ms-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  padding: 3px 10px;
+  border-top: solid 1px none;
+  border-left: solid 1px #d5d5d5;
+  border-right: solid 1px #d5d5d5;
+  border-bottom: solid 1px #d5d5d5;
+  -webkit-border-top-right-radius: 0;
+  -webkit-border-bottom-right-radius: 4px;
+  -webkit-border-bottom-left-radius: 4px;
+  -webkit-border-top-left-radius: 0;
+  -moz-border-radius-topright: 0;
+  -moz-border-radius-bottomright: 4px;
+  -moz-border-radius-bottomleft: 4px;
+  -moz-border-radius-topleft: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 0;
+  -moz-background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+.posts .summary .article-info {
   clear: both;
   overflow: auto;
-  padding: 3px 10px;
 }
 .posts .summary .article-info .post-date {
   line-height: 1em;
 }
 .posts .summary .article-info .post-date {
-  font-size: 12px;
-  font-size: 1.2rem;
   font-weight: 500;
   text-transform: lowercase;
   padding: 6px 0 0;
 }
-.posts .summary .desc {
-  -ms-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  padding: 3px 10px;
-}
 .posts .summary .article-footer {
   overflow: auto;
-  padding: 0 10px 5px;
-}
-.posts .summary .article-footer .post-hash {
-  font-family: Monaco, Courier, monospace;
-  float: right;
-  font-size: 12px;
-  font-size: 1.2rem;
-  line-height: 1em;
-}
-.posts .summary .article-footer .post-hash .article-read-more {
-  border: 1px solid #d5d5d5;
-  -ms-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  color: #777777;
-  float: right;
-  background: #f2f5f6;
-  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #f2f5f6), color-stop(1, #eaf4f8));
-  background: -ms-linear-gradient(bottom, #f2f5f6, #eaf4f8);
-  background: -moz-linear-gradient(center bottom, #f2f5f6 0%, #eaf4f8 100%);
-  background: -o-linear-gradient(#eaf4f8, #f2f5f6);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eaf4f8', endColorstr='#f2f5f6', GradientType=0);
-  padding: 5px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  vertical-align: bottom;
-}
-.posts .summary .article-footer .post-hash .article-read-more:hover {
-  text-decoration: none;
-  border-color: #e7e86d;
-  background: #fdfdf1;
-  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #ebeb83), color-stop(1, #fdfdf1));
-  background: -ms-linear-gradient(bottom, #ebeb83, #fdfdf1);
-  background: -moz-linear-gradient(center bottom, #ebeb83 0%, #fdfdf1 100%);
-  background: -o-linear-gradient(#fdfdf1, #ebeb83);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fdfdf1', endColorstr='#ebeb83', GradientType=0);
-}
-.posts .summary .article-footer .post-hash .article-read-more:hover .hash-arrow {
-  background-color: #fdfdf1;
-  border-color: #aaaaaa;
-  color: #aaaaaa;
-}
-.posts .summary .article-footer .post-hash .hash-arrow {
-  background: #ffffff;
-  border: 1px solid #919191;
-  color: #919191;
-  display: inline-block;
-  font-size: 8px;
-  font-size: 0.8rem;
-  height: 10px;
-  padding: 0 9px 12px 3px;
-  -webkit-border-radius: 100%;
-  -moz-border-radius: 100%;
-  border-radius: 100%;
-  text-align: center;
-  vertical-align: middle;
-  width: 10px;
+  /*.post-hash {
+				font-family: Monaco, Courier, monospace;
+				float:right;
+				//.font-size(1.2);
+				line-height: 1em;
+
+				.article-read-more {
+					border: 1px solid @github_grey_4;
+					.box-sizing();
+					color: @grey;
+					float: right;
+					.gradient(#f2f5f6, #f2f5f6, #eaf4f8);
+					padding: 5px;
+					.rounded(3px);
+					vertical-align: bottom;
+					&:hover {
+						text-decoration: none;
+						border-color: @yellow;
+						.gradient(lighten(@yellow, 30%), lighten(@yellow, 5%), lighten(@yellow, 30%));
+						.hash-arrow {
+							background-color: lighten(@yellow, 30%);
+							border-color: lighten(@grey, 20%);
+							color: lighten(@grey, 20%);
+						}
+					}
+				}
+				.hash-arrow {
+					background: lighten(@grey, 90%);
+					border: 1px solid lighten(@grey, 10%);
+					color: lighten(@grey, 10%);
+					display: inline-block;
+					//.font-size(0.8);
+					height: 10px;
+					padding: 0 9px 12px 3px;
+					.rounded(100%);
+					text-align: center;
+					vertical-align: middle;
+					width: 10px;
+				}
+			} */
+
 }
 .tags {
   -ms-box-sizing: border-box;
@@ -352,9 +369,13 @@ hr {
   display: block;
   padding: 3px 5px;
   background: #ceffce;
-  font-size: 10px;
-  font-size: 1rem;
+  font-size: 8px;
+  font-size: 0.8rem;
   font-family: Monaco, Courier, monospace;
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
 }
 .tags .tag a:before {
   content: "+ ";
@@ -362,10 +383,19 @@ hr {
 .tags .tag a:hover {
   background: #f7c8c8;
   text-decoration: none;
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
 }
 .tags .tag a:hover:before {
   content: "- ";
 }
 .content .article-footer {
   overflow: auto;
+}
+button a {
+  color: #333;
+  padding: ;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
 }
