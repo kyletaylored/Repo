@@ -6,9 +6,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
-
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="description" content="{{ site.bio|striptags }} - {{ site.author }}" />
-	<meta name="copyright" content="Copyright (c) 2013 {{ site.author }}" />
+	<meta name="dcterms.rightsHolder" content="Copyright (c) 2013 {{ site.author }}" />
 
 	<meta property="og:site_name" content="{{ site.name }}" />
 	{% if is_post %}
@@ -64,18 +64,21 @@
 	<link rel="shortcut icon" href="http://www.iconj.com/ico/8/a/8ajittswcl.ico" type="image/x-icon" />
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
 	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="https://rawgithub.com/kamisama/cal-heatmap/master/cal-heatmap.css">
 	<!-- <link rel="stylesheet" type="text/css" href="https://rawgithub.com/kyletaylored/Repo/master/css/global.css"> -->
 	<link rel="stylesheet" type="text/css" href="http://sandbox/global.css">
 	<link href="{{ static('mediaelement/mediaelementplayer.css') }}" rel="stylesheet" />
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="//d3js.org/d3.v3.min.js"></script>
+	<script type="text/javascript" src="https://rawgithub.com/kamisama/cal-heatmap/master/cal-heatmap.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
 
 	<script type="text/javascript">
 	// Here you can set some custom information about yourself!
 	// Things like where you're from, what you're good at, etc.
-	var info = {
+	var personal_info = {
 		"position" : "Developer & Startup Evangelist",
 		"specialties" : "Drupal, Javascript, LESS",
 		"location" : "Dallas, Texas",
@@ -117,7 +120,7 @@
 
 	// Add values to localStorage for future reference, updating incrementally.
 	if(typeof(Storage)!=="undefined") {
-		console.log("Yay, you have web storage! I think I lost my watch in here somewhere...")
+		console.log("Yay, you have web storage! I think I left my watch in here somewhere...")
 		if (!localStorage.num_posts || num_posts > localStorage.num_posts) {
 			localStorage.num_posts = num_posts;
 		}
@@ -133,223 +136,316 @@
 	}
 
 	$(document).ready(function(){
-		
+		// Set counts on page.
 		document.querySelector(".tag-count .value").innerHTML= localStorage.num_tags;
 		document.querySelector(".post-count .value").innerHTML= localStorage.num_posts;
 		document.querySelector(".word-count .value").innerHTML= numberWithCommas(localStorage.num_words);
+		
+		// Add personal information and icons.
+		if (personal_info) {
+			for(var index in personal_info) {
+				var icon, item;
+				var value = personal_info[index];
+
+				switch (index) {
+					case "position":
+					icon = "icon-briefcase";
+					break;
+					case "specialties":
+					icon = "icon-code";
+					break;
+					case "location":
+					icon = "icon-map-marker";
+					break;
+					case "email":
+					icon = "icon-rocket";
+					break;
+				}
+				if (index == "email") {
+					item = '<li><i class="'+icon+'"></i><a href= "mailto:'+value+'">'+value+'</a></li>';
+				} else {
+					item = '<li><i class="'+icon+'"></i>'+value+'</li>';
+				}
+				$(".personal-info").append(item);
+			}
+		}
+
+		if (socialLinks) {
+			var $social_menu = $('.social-btns li').last();
+			for (index in socialLinks) {
+				var new_social = '<li><a href="'+socialLinks[index]['url']+
+				'" title="'+socialLinks[index]['service']+'-'+socialLinks[index]['username']+
+				'" target="_blank"><i class="'+socialLinks[index]['icon']+'"></i></a></li>';
+				$social_menu.before(new_social);
+			}
+		}
 
 	});
-	function numberWithCommas(x) {
-		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-	}
+function numberWithCommas(x) {
+	return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
-	</script>
+</script>
 </head>
 
 <body>
 	<!-- I see you like to look at source code :) Me too! -->
-	<div class="row">
-		<div class="navigation col-md-12">
-			<nav role="navigation" id="nav" class="container navbar navbar-default">
-				<!-- Brand and toggle get grouped for better mobile display -->
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="/"><i class="icon-home"></i></a>
-				</div>
-				<ul class="navbar-left collapse navbar-collapse navbar-ex1-collapse">
-					<li><a href="/" clas="home">Home</a></li>
-					{% if pages %}
-					{% for page in pages %}
-					<li><a href="{{ page.permalink }}">{{ page.title }}</a></li>
-					{% endfor %}
-					{% endif %}
-				</ul>
-				<ul class="social-btns navbar-right navbar-nav">
-					<li>{% if site.twitter %}<a href="http://twitter.com/{{ site.twitter }}" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>{% endif %}</li>
-					<li>{% if site.facebook %}<a href="http://facebook.com/{{ site.facebook }}" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>{% endif %}</li>
-					<li>{% if site.googleplus %}<a href="https://plus.google.com/{{ site.googleplus }}?rel=author" rel="author" title="Google+" target="_blank"><i class="icon-google-plus"></i></a>{% endif %}</li>
-					<li>{% if site.linkedin %}<a href="{{ site.linkedin }}" title="Linkedin" target="_blank"><i class="icon-linkedin"></i></a>{% endif %}</li>
-					<li><a href="{{ site.atom_url }}" title="RSS" target="_blank"><i class="icon-rss"></i></a></li>
-				</ul>
-			</nav>
-		</div>
-		<div class="container">
-			<div class="col-md-3">
-				<header class="site-header">
-					<div class="logo">
-						<a href="/"><img class="avatar" src="{{ site.avatar }}" alt="{{ site.author }}" /></a>
-					</div>
-					<h1 class="site-author">{{ site.author }}</h1>
-					<div class="site-name">{{ site.name }}</div>
-					<hr />
-					<p class="description">
-						{{site.bio}}
-					</p>
-					<hr />
-					<ul class="blog-stats">
-						<li class="post-count">
-							<div class="value">0</div>
-							<div class="type">Posts</div>
-						</li>
-						<li class="word-count">
-							<div class="value">0</div>
-							<div class="type">Words</div>
-						</li>
-						<li class="tag-count">
-							<div class="value">0</div>
-							<div class="type">Tags</div>
-						</li>
-					</ul>
-					<hr />
-					<ul class="personal-stats">
-						<li class="outer-bar"><div class="inner-bar" style="width: 65%;">HTML/CSS</div></li>
-						<li class="outer-bar"><div class="inner-bar" style="width: 82%;">LESS</div></li>
-						<li class="outer-bar"><div class="inner-bar" style="width: 73%;">Javascript</div></li>
-						<li class="outer-bar"><div class="inner-bar" style="width: 58%;">PHP</div></li>
-						<li class="outer-bar"><div class="inner-bar" style="width: 90%;">Drupal</div></li>
-					</ul>
-				</header>
-
+	<div class="navigation col-md-12">
+		<nav role="navigation" id="nav" class="container navbar navbar-default">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/"><i class="icon-off"></i></a>
 			</div>
-			<div role="main" class="main col-md-9">
-				<div class="block">
-					<a href="#nav" id="toggle" class="block" aria-hidden="true"></a>
+			<ul class="navbar-left collapse navbar-collapse navbar-ex1-collapse no-list-style">
+				<li><a href="/" class="home">Home</a></li>
+				{% if pages %}
+				{% for page in pages %}
+				<li><a href="{{ page.permalink }}">{{ page.title }}</a></li>
+				{% endfor %}
+				{% endif %}
+			</ul>
+			<ul class="social-btns navbar-right navbar-nav no-list-style">
+				<li>{% if site.twitter %}<a href="http://twitter.com/{{ site.twitter }}" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>{% endif %}</li>
+				<li>{% if site.facebook %}<a href="http://facebook.com/{{ site.facebook }}" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>{% endif %}</li>
+				<li>{% if site.googleplus %}<a href="https://plus.google.com/{{ site.googleplus }}?rel=author" rel="author" title="Google+" target="_blank"><i class="icon-google-plus"></i></a>{% endif %}</li>
+				<li>{% if site.linkedin %}<a href="{{ site.linkedin }}" title="Linkedin" target="_blank"><i class="icon-linkedin"></i></a>{% endif %}</li>
+				<li><a href="{{ site.atom_url }}" title="RSS" target="_blank"><i class="icon-rss"></i></a></li>
+			</ul>
+		</nav>
+	</div>
+	<div class="container">
+		<div class="col-md-3">
+			<header class="site-header">
+				<div class="logo">
+					<a href="/"><img class="avatar" src="{{ site.avatar }}" alt="{{ site.author }}" /></a>
 				</div>
-				<div class="content">
+				<h1 class="site-author">{{ site.author }}</h1>
+				<div class="site-name">{{ site.name }}</div>
+				<hr />
+				<p class="description">
+					{{site.bio}}
+				</p>
+				<hr />
+				<ul class="personal-info no-list-style">
 
-					{% if is_home or is_tag %}
-					{% if posts %}
-					<section class="posts">
-						{% if is_tag %}
-						<h2>Tag: {{ tag }}</h2>
-						<hr />
-						{% endif %}
-						{% for post in posts %}
-						<article itemscope itemtype="http://schema.org/Article" class="summary">
-							<header class="article-header">
-								<h2 class="title">
-									<a href="{{ post.permalink }}">{{ post.title }}</a><span class="article-icon"><i class="icon-file-text"></i></span>
-								</h2>
-							</header>
-							<div class="article-content">
-								<div class="article-info">
-									<div class="post-date">
-										<div>{{ site.author }} authored on <span class="date-info">{{ post.created_at|format_date }}</span></div>
-									</div>
-								</div>
-								{% if post.content|striptags|wordcount > 0 %}
-								<p class="desc">{{ post.content|striptags|truncate(500) }}</p>
-								<div class="article-footer">
-									{% endif %}
-									{% if post.tags %}
-									<div class="tags">
-										{% for tag in post.tags %}
-										<div class="tag">{{ tag|format_tag }}</div>
-										{% endfor %}
-									</div>
-									{% endif %}
-									<button class="post-hash btn btn-default"><a href="{{ post.permalink }}" class="article-read-more">Read More <span class="hash-arrow"><i class="icon-arrow-right"></i></span></a></button>
+				</ul>
+				<hr />
+				<ul class="blog-stats no-list-style">
+					<li class="post-count">
+						<div class="value">0</div>
+						<div class="type">Posts</div>
+					</li>
+					<li class="word-count">
+						<div class="value">0</div>
+						<div class="type">Words</div>
+					</li>
+					<li class="tag-count">
+						<div class="value">0</div>
+						<div class="type">Tags</div>
+					</li>
+				</ul>
+				<hr />
+				<div id="cal-heatmap"></div>
+				<script type="text/javascript">
+				var cal = new CalHeatMap();
+				var start_date, start_month, start_year, now_month, now_year, now;
+				//now = new Date();
+				now = new Date(2014, 1);
+				now_year = now.getFullYear();
+				now_month = now.getMonth();
+				switch (now_month) {
+					case 1:
+					start_month = 11;
+					start_year = now_year - 1;
+					console.log("Year: "+start_year+", Month: "+start_month+", Now Month: "+now_month);
+					break;
+
+					case 2:
+					start_month = 12;
+					start_year = now_year - 1;
+					console.log("Year: "+start_year+", Month: "+start_month+", Now Month: "+now_month);
+					break;
+
+					default:
+					start_month = now_month - 1;
+					start_year = now_year;
+					console.log("Year: "+start_year+", Month: "+start_month+", Now Month: "+now_month);
+					break;
+				}
+				console.log("Start Year: "+start_year+", Start Month: "+start_month);
+				start_date = new Date(start_year, start_month);
+				console.log(start_date);
+				var test_date = new Date(2013, 11);
+				console.log(test_date);
+
+				cal.init({
+					itemSelector: "#cal-heatmap",
+					domain: "month",
+					start: start_date,
+					minDate: start_date,
+					maxDate: now,
+					subDomain: "day",
+					range: 3,
+					displayLegend: false
+				});
+
+				$("#minDate-previous").on("click", function(e) {
+					e.preventDefault();
+					if (!cal.previous()) {
+						alert("No more domains to load");
+					}
+				});
+
+				$("#minDate-next").on("click", function(e) {
+					e.preventDefault();
+					if (!cal.next()) {
+						alert("No more domains to load");
+					}
+				});
+				</script>
+			</header>
+
+		</div>
+		<div role="main" class="main col-md-9">
+			<div class="block">
+				<a href="#nav" id="toggle" class="block" aria-hidden="true"></a>
+			</div>
+			<div class="content">
+
+				{% if is_home or is_tag %}
+				{% if posts %}
+				<section class="posts">
+					{% if is_tag %}
+					<h2>Tag: {{ tag }}</h2>
+					<hr />
+					{% endif %}
+					{% for post in posts %}
+					<article itemscope itemtype="http://schema.org/Article" class="summary">
+						<header class="article-header">
+							<h2 class="title">
+								<a href="{{ post.permalink }}">{{ post.title }}</a><span class="article-icon"><i class="icon-file-text"></i></span>
+							</h2>
+						</header>
+						<div class="article-content">
+							<div class="article-info">
+								<div class="post-date">
+									<div>{{ site.author }} authored on <span class="date-info">{{ post.created_at|format_date }}</span></div>
 								</div>
 							</div>
-						</article>
-						{% endfor %}
-					</section>
-					{% if not is_tag %}
-					<div class="pagination">
-						{% if pagination.prev %}<a href="{{ pagination.prev }}" class="post-prev">&larr; View Previous Posts</a>{% endif %}
-						{% if pagination.next %}<a href="{{ pagination.next }}" class="post-next">View More Posts &rarr;</a>{% endif %}
-					</div>
-					{% endif %}
-					{% else %}
-					<p class="no-posts"><em>No posts yet :(</em></p>
-					{% endif %}
-					{% elif is_post %}
-					<article itemscope itemtype="http://schema.org/Article" class="post">
-						<header class="title">
-							<h2>{{ post.title }}</h2>
-							<p class="post-date">Published by {{ site.author }} on {{ post.created_at|format_date }}</p>
-						</header>
-						<section class="content">
-							{{ post.content }}
-							{% if post.tags %}
+							{% if post.content|striptags|wordcount > 0 %}
+							<p class="desc">{{ post.content|striptags|truncate(500) }}</p>
 							<div class="article-footer">
+								{% endif %}
+								{% if post.tags %}
 								<div class="tags">
 									{% for tag in post.tags %}
 									<div class="tag">{{ tag|format_tag }}</div>
 									{% endfor %}
 								</div>
+								{% endif %}
+								<div class="post-hash"><a href="{{ post.permalink }}" class="btn btn-default article-read-more">Read More <span class="hash-arrow"><i class="icon-arrow-right"></i></span></a></div>
 							</div>
-							{% endif %}
-						</section>
-						{% if site.disqus %}
-						<hr />
-						<section class="comments">
-							<div id="disqus_thread"></div>
-							<script type="text/javascript">
-							var disqus_shortname = '{{ site.disqus }}';
-							(function() {
-								var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-								dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-								(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-							})();
-							</script>
-							<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-							<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-						</section>
-						{% endif %}
+						</div>
 					</article>
-					{% elif is_link %}
-					<article itemscope itemtype="http://schema.org/Article" class="post">
-						<header class="title">
-							<h2>{{ link.title }}</h2>
-							<p class="post-date">Published by {{ site.author }} on {{ link.created_at|format_date }}</p>
-						</header>
-						<section class="content">
-							{{ link.content }}
-							<span class="link-url"><i class="icon-share"></i> <a href="{{ link.url }}">{{ link.url }}</a></span>
-							{% if link.tags %}
-							<div class="tags">
-								{{ link.tags|format_tags(delimiter=' ') }}
-							</div>
-							{% endif %}
-						</section>
-						{% if site.disqus %}
-						<hr />
-						<section class="comments">
-							<div id="disqus_thread"></div>
-							<script type="text/javascript">
-							var disqus_shortname = '{{ site.disqus }}';
-							(function() {
-								var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-								dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-								(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-							})();
-							</script>
-							<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-							<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-						</section>
-						{% endif %}
-					</article>
-					{% elif is_page %}
-					<div class="post">
-						<h1>{{ page.title }}</h1>
-						<hr />
-						{{ page.content }}
-					</div>
-					{% endif %}
-
-					<footer class="site-footer">
-						<p class="left">All rights Reserved &copy; <a href="/">{{ site.name }}</a></p>
-						<p class="right">Powered by <a href="http://postach.io" target="_blank">Postach.io</a></p>
-					</footer>
+					{% endfor %}
+				</section>
+				{% if not is_tag %}
+				<div class="pagination">
+					{% if pagination.prev %}<a href="{{ pagination.prev }}" class="post-prev">&larr; View Previous Posts</a>{% endif %}
+					{% if pagination.next %}<a href="{{ pagination.next }}" class="post-next">View More Posts &rarr;</a>{% endif %}
 				</div>
+				{% endif %}
+				{% else %}
+				<p class="no-posts"><em>No posts yet :(</em></p>
+				{% endif %}
+				{% elif is_post %}
+				<article itemscope itemtype="http://schema.org/Article" class="post">
+					<header class="title">
+						<h2>{{ post.title }}</h2>
+						<p class="post-date">Published by {{ site.author }} on {{ post.created_at|format_date }}</p>
+					</header>
+					<section class="content">
+						{{ post.content }}
+						{% if post.tags %}
+						<div class="article-footer">
+							<div class="tags">
+								{% for tag in post.tags %}
+								<div class="tag">{{ tag|format_tag }}</div>
+								{% endfor %}
+							</div>
+						</div>
+						{% endif %}
+					</section>
+					{% if site.disqus %}
+					<hr />
+					<section class="comments">
+						<div id="disqus_thread"></div>
+						<script type="text/javascript">
+						var disqus_shortname = '{{ site.disqus }}';
+						(function() {
+							var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+							dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+							(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+						})();
+						</script>
+						<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+						<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+					</section>
+					{% endif %}
+				</article>
+				{% elif is_link %}
+				<article itemscope itemtype="http://schema.org/Article" class="post">
+					<header class="title">
+						<h2>{{ link.title }}</h2>
+						<p class="post-date">Published by {{ site.author }} on {{ link.created_at|format_date }}</p>
+					</header>
+					<section class="content">
+						{{ link.content }}
+						<span class="link-url"><i class="icon-share"></i> <a href="{{ link.url }}">{{ link.url }}</a></span>
+						{% if link.tags %}
+						<div class="tags">
+							{{ link.tags|format_tags(delimiter=' ') }}
+						</div>
+						{% endif %}
+					</section>
+					{% if site.disqus %}
+					<hr />
+					<section class="comments">
+						<div id="disqus_thread"></div>
+						<script type="text/javascript">
+						var disqus_shortname = '{{ site.disqus }}';
+						(function() {
+							var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+							dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+							(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+						})();
+						</script>
+						<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+						<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+					</section>
+					{% endif %}
+				</article>
+				{% elif is_page %}
+				<div class="post">
+					<h1>{{ page.title }}</h1>
+					<hr />
+					{{ page.content }}
+				</div>
+				{% endif %}
 			</div>
 		</div>
+	</div>
+	<div class="col-md-12 site-footer">
+		<footer class="container">
+			<p class="left">All rights Reserved &copy; <a href="/">{{ site.name }}</a></p>
+			<p class="right">Powered by <a href="http://postach.io" target="_blank">Postach.io</a></p>
+		</footer>
 	</div>
 	<script src="{{ static('mediaelement/mediaelement-and-player.min.js') }}"></script>
 	<script>
