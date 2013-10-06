@@ -1,0 +1,8 @@
+{
+  "name": "cal-heatmap",
+  "version": "3.2.1",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kamisama/cal-heatmap.git"
+  }
+}

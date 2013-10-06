@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<!-- saved from url=(0024)http://kyletaylored.com/ -->
+<html style="" class=" js flexbox canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Kyle Taylor | kyletaylored.com</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+	<meta name="description" content="Web developer. UNT alumni. Startup Weekend organizer. Hacker. OpenData advocate. Drupal-er. I love Denton, creativity, innovation, and coffee. - Kyle Taylor">
+	<meta name="copyright" content="Copyright (c) 2013 Kyle Taylor">
+
+	<meta property="og:site_name" content="kyletaylored.com">
+	
+	<meta property="og:image" content="http://media1.postach.io/d6669af98e3019344d39a0fce2c8e8a4/avatar_408d1589efea989fca5a20d1a19cb4bf.png">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="kyletaylored.com">
+	<meta property="og:url" content="http://kyletaylored.com">
+	<meta property="og:description" content="Web developer. UNT alumni. Startup Weekend organizer. Hacker. OpenData advocate. Drupal-er. I love Denton, creativity, innovation, and coffee.">
+	
+
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:site" content="@kyletaylored">
+	
+	<meta name="twitter:title" content="kyletaylored.com">
+	<meta name="twitter:description" content="Web developer. UNT alumni. Startup Weekend organizer. Hacker. OpenData advocate. Drupal-er. I love Denton, creativity, innovation, and coffee....">
+	
+	<meta name="twitter:creator" content="@kyletaylored">
+	<meta name="twitter:image:src" content="http://media1.postach.io/d6669af98e3019344d39a0fce2c8e8a4/avatar_408d1589efea989fca5a20d1a19cb4bf.png">
+	<meta name="twitter:domain" content="http://kyletaylored.com">
+	
+	<link rel="shortcut icon" href="http://www.iconj.com/ico/8/a/8ajittswcl.ico" type="image/x-icon">
+	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+	<!-- <link rel="stylesheet" type="text/css" href="https://rawgithub.com/kyletaylored/Repo/master/css/global.css"> -->
+	<link rel="stylesheet" type="text/css" href="./demo_files/global.css">
+	<link href="http://postach.io/static/mediaelement/mediaelementplayer.css" rel="stylesheet">
+
+	<script type="text/javascript" async="" src="./demo_files/ga.js"></script><script src="./demo_files/jquery.min.js"></script>
+	<script src="./demo_files/bootstrap.min.js"></script>
+	<script src="./demo_files/modernizr.min.js"></script>
+
+	<script type="text/javascript">
+	// Here you can set some custom information about yourself!
+	// Things like where you're from, what you're good at, etc.
+	var personal_info = {
+		"position" : "Developer & Startup Evangelist",
+		"specialties" : "Drupal, Javascript, LESS",
+		"location" : "Dallas, Texas",
+		"email" : "kyle@gotaylored.com",
+	};
+
+	// Other social network links.
+	var socialLinks = [
+	{
+		"service" : "Instagram",
+		"username" : "KyleTaylored",
+		"url" : "http://instagram.com/kyletaylored",
+		"icon" : "icon-instagram"
+	},
+	{
+		"service" : "Github",
+		"username" : "KyleTaylored",
+		"url" : "http://github.com/kyletaylored",
+		"icon" : "icon-github"
+	}
+	];
+
+	// Fun word stats.
+	var num_posts = 0;
+	var num_words = 0;
+	var num_tags = 0;
+
+	
+	
+	  
+	num_posts += 1;
+	num_words = num_words + parseInt(459);
+	
+	  
+	num_posts += 1;
+	num_words = num_words + parseInt(340);
+	
+	  
+	num_posts += 1;
+	num_words = num_words + parseInt(614);
+	
+	  
+	num_posts += 1;
+	num_words = num_words + parseInt(360);
+	
+	
+	
+	
+	num_tags+=1;
+	
+	num_tags+=1;
+	
+	num_tags+=1;
+	
+	num_tags+=1;
+	
+	num_tags+=1;
+	
+	num_tags+=1;
+	
+	num_tags+=1;
+	
+
+	// Add values to localStorage for future reference, updating incrementally.
+	if(typeof(Storage)!=="undefined") {
+		console.log("Yay, you have web storage! I think I left my watch in here somewhere...")
+		if (!localStorage.num_posts || num_posts > localStorage.num_posts) {
+			localStorage.num_posts = num_posts;
+		}
+		if (!localStorage.num_words || num_words > localStorage.num_words) {
+			if (num_words > 99999) {num_words = num_words.toExponential(3)};
+			localStorage.num_words = num_words;
+		}
+		if (!localStorage.num_tags || num_tags > localStorage.num_tags) {
+			localStorage.num_tags = num_tags;
+		}
+	} else {
+		console.log("Sorry, no web storage for you. :(");
+	}
+
+	$(document).ready(function(){
+		
+		document.querySelector(".tag-count .value").innerHTML= localStorage.num_tags;
+		document.querySelector(".post-count .value").innerHTML= localStorage.num_posts;
+		document.querySelector(".word-count .value").innerHTML= numberWithCommas(localStorage.num_words);
+
+	});
+	function numberWithCommas(x) {
+		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+
+	</script>
+</head>
+
+<body>
+	<!-- I see you like to look at source code :) Me too! -->
+	<div class="row">
+		<div class="navigation col-md-12">
+			<nav role="navigation" id="nav" class="container navbar navbar-default">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="./demo_files/demo.html"><i class="icon-home"></i></a>
+				</div>
+				<ul class="navbar-left collapse navbar-collapse navbar-ex1-collapse">
+					<li><a href="./demo_files/demo.html" clas="home">Home</a></li>
+					
+					
+					<li><a href="http://kyletaylored.com/about">About</a></li>
+					
+					
+				</ul>
+				<ul class="social-btns navbar-right navbar-nav">
+					<li><a href="http://twitter.com/kyletaylored" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+					<li><a href="http://facebook.com/kyletaylored" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+					<li><a href="https://plus.google.com/117938113494607532736?rel=author" rel="author" title="Google+" target="_blank"><i class="icon-google-plus"></i></a></li>
+					<li><a href="http://linkedin.com/i/kyletaylored" title="Linkedin" target="_blank"><i class="icon-linkedin"></i></a></li>
+					<li><a href="http://kyletaylored.com/feed" title="RSS" target="_blank"><i class="icon-rss"></i></a></li>
+				</ul>
+			</nav>
+		</div>
+		<div class="container">
+			<div class="col-md-3">
+				<header class="site-header">
+					<div class="logo">
+						<a href="./demo_files/demo.html"><img class="avatar" src="./demo_files/avatar_408d1589efea989fca5a20d1a19cb4bf.png" alt="Kyle Taylor"></a>
+					</div>
+					<h1 class="site-author">Kyle Taylor</h1>
+					<div class="site-name">kyletaylored.com</div>
+					<hr>
+					<p class="description">
+						Web developer. UNT alumni. Startup Weekend organizer. Hacker. OpenData advocate. Drupal-er.
+
+I love Denton, creativity, innovation, and coffee.
+					</p>
+					<hr>
+					<ul class="blog-stats">
+						<li class="post-count">
+							<div class="value">4</div>
+							<div class="type">Posts</div>
+						</li>
+						<li class="word-count">
+							<div class="value">1,773</div>
+							<div class="type">Words</div>
+						</li>
+						<li class="tag-count">
+							<div class="value">7</div>
+							<div class="type">Tags</div>
+						</li>
+					</ul>
+					<hr>
+					<ul class="personal-stats">
+						<li class="outer-bar"><div class="inner-bar" style="width: 65%;">HTML/CSS</div></li>
+						<li class="outer-bar"><div class="inner-bar" style="width: 82%;">LESS</div></li>
+						<li class="outer-bar"><div class="inner-bar" style="width: 73%;">Javascript</div></li>
+						<li class="outer-bar"><div class="inner-bar" style="width: 58%;">PHP</div></li>
+						<li class="outer-bar"><div class="inner-bar" style="width: 90%;">Drupal</div></li>
+					</ul>
+				</header>
+
+			</div>
+			<div role="main" class="main col-md-9">
+				<div class="block">
+					<a href="http://kyletaylored.com/#nav" id="toggle" class="block" aria-hidden="true"></a>
+				</div>
+				<div class="content">
+
+					
+					
+					<section class="posts">
+						
+						
+						<article itemscope="" itemtype="http://schema.org/Article" class="summary">
+							<header class="article-header">
+								<h2 class="title">
+									<a href="http://kyletaylored.com/how-to-fund-your-gaming-startup-on-kickstarter-with-steven-russell-of-rite-publishing">How to fund your gaming startup on Kickstarter with Steven Russell of Rite Publishing</a><span class="article-icon"><i class="icon-file-text"></i></span>
+								</h2>
+							</header>
+							<div class="article-content">
+								<div class="article-info">
+									<div class="post-date">
+										<div>Kyle Taylor authored on <span class="date-info">September 23rd, 2013</span></div>
+									</div>
+								</div>
+								
+								<p class="desc">I had the chance to go up to the University of North Texas in Denton and sit in on a seminar over how to fund your gaming startup on Kickstarter. It was actually really interesting and I learned a lot of common pitfalls and misconceptions when starting a Kickstarter. Steven Russell is the CEO of Rite Publishing a micro press PDF publishing company that has produced over 150 products. Steven himself has more passions and interests than just what he does for his company. He's also a writer who ...</p>
+								<div class="article-footer">
+									
+									
+									<div class="tags">
+										
+										<div class="tag"><a href="http://kyletaylored.postach.io/tag/startup">startup</a></div>
+										
+										<div class="tag"><a href="http://kyletaylored.postach.io/tag/denton">denton</a></div>
+										
+										<div class="tag"><a href="http://kyletaylored.postach.io/tag/unt">unt</a></div>
+										
+										<div class="tag"><a href="http://kyletaylored.postach.io/tag/kickstarter">kickstarter</a></div>
+										
+									</div>
+									
+									<div class="post-hash"><a href="http://kyletaylored.com/how-to-fund-your-gaming-startup-on-kickstarter-with-steven-russell-of-rite-publishing" class="btn btn-default article-read-more">Read More <span class="hash-arrow"><i class="icon-arrow-right"></i></span></a></div>
+								</div>
+							</div>
+						</article>
+						
+						<article itemscope="" itemtype="http://schema.org/Article" class="summary">
+							<header class="article-header">
+								<h2 class="title">
+									<a href="http://kyletaylored.com/new-dallas-coworking-space-the-grove">New Dallas Coworking Space: The Grove</a><span class="article-icon"><i class="icon-file-text"></i></span>
+								</h2>
+							</header>
+							<div class="article-content">
+								<div class="article-info">
+									<div class="post-date">
+										<div>Kyle Taylor authored on <span class="date-info">September 16th, 2013</span></div>
+									</div>
+								</div>
+								
+								<p class="desc">I had the chance to attend the grand opening of The Grove, which is a new coworking space located right in downtown Dallas next to the 6th Floor Museum. They feature space and resources for entrepreneurs, freelancers, or consultants of any kind to help grow their business. If you need little creative mindset and just want to be around inspiring people, go hang out in their open coworking area and make some new friends. They offer an abundance of resources and office space, including 3 offices ...</p>
+								<div class="article-footer">
+									
+									
+									<div class="tags">
+										
+										<div class="tag"><a href="http://kyletaylored.postach.io/tag/startup">startup</a></div>
+										
+										<div class="tag"><a href="http://kyletaylored.postach.io/tag/dallas">dallas</a></div>
+										
+										<div class="tag"><a href="http://kyletaylored.postach.io/tag/coworking">coworking</a></div>
+										
+									</div>
+									
+									<div class="post-hash"><a href="http://kyletaylored.com/new-dallas-coworking-space-the-grove" class="btn btn-default article-read-more">Read More <span class="hash-arrow"><i class="icon-arrow-right"></i></span></a></div>
+								</div>
+							</div>
+						</article>
+						
+						<article itemscope="" itemtype="http://schema.org/Article" class="summary">
+							<header class="article-header">
+								<h2 class="title">
+									<a href="http://kyletaylored.com/starting-fresh-on-postach-io">Starting Fresh on Postach.io</a><span class="article-icon"><i class="icon-file-text"></i></span>
+								</h2>
+							</header>
+							<div class="article-content">
+								<div class="article-info">
+									<div class="post-date">
+										<div>Kyle Taylor authored on <span class="date-info">August 5th, 2013</span></div>
+									</div>
+								</div>
+								
+								<p class="desc">I've been moving my blog around for about the past 2 years because I could never find a platform that I just really enjoyed. I tried Wordpress, Drupal, Tumblr, and even Jekyll/Octopress, but I was just never very happy with any of them. So the search continued. For the record, I write a lot... kind of. I grew up not really liking my english or history classes (though my teachers were really fascinating), I was more of a math &amp; science nerd. I hated writing essays, but it turned out that even ...</p>
+								<div class="article-footer">
+									
+									
+									<div class="tags">
+										
+										<div class="tag"><a href="http://kyletaylored.postach.io/tag/personal">personal</a></div>
+										
+									</div>
+									
+									<div class="post-hash"><a href="http://kyletaylored.com/starting-fresh-on-postach-io" class="btn btn-default article-read-more">Read More <span class="hash-arrow"><i class="icon-arrow-right"></i></span></a></div>
+								</div>
+							</div>
+						</article>
+						
+						<article itemscope="" itemtype="http://schema.org/Article" class="summary">
+							<header class="article-header">
+								<h2 class="title">
+									<a href="http://kyletaylored.com/welcome-to-postach-io">Welcome to Postach.io!</a><span class="article-icon"><i class="icon-file-text"></i></span>
+								</h2>
+							</header>
+							<div class="article-content">
+								<div class="article-info">
+									<div class="post-date">
+										<div>Kyle Taylor authored on <span class="date-info">August 2nd, 2013</span></div>
+									</div>
+								</div>
+								
+								<p class="desc">Postach.io is the blogging platform thats powered by your Evernote documents. How It Works Postach.io creates blog posts and pages from your notes. To create a post, write a note and tag it as "published" in this notebook. Then click the "Sync" button. Bam! Your note is published on your site, just like that! Creating a page works the same, except you add an additional tag "page". This tells Postach.io to create your note as page instead of a post. Updating a note is just as easy. Try making a ...</p>
+								<div class="article-footer">
+									
+									
+									<div class="post-hash"><a href="http://kyletaylored.com/welcome-to-postach-io" class="btn btn-default article-read-more">Read More <span class="hash-arrow"><i class="icon-arrow-right"></i></span></a></div>
+								</div>
+							</div>
+						</article>
+						
+					</section>
+					
+					<div class="pagination">
+						
+						
+					</div>
+					
+					
+					
+
+					<footer class="site-footer">
+						<p class="left">All rights Reserved © <a href="./demo_files/demo.html">kyletaylored.com</a></p>
+						<p class="right">Powered by <a href="http://postach.io/" target="_blank">Postach.io</a></p>
+					</footer>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="./demo_files/mediaelement-and-player.min.js"></script>
+	<script>
+	$('audio').mediaelementplayer();
+	</script>
+
+	
+	<script>
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-36441409-1']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+	</script>
+	
+
+
+</body></html>
