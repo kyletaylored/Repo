@@ -105,6 +105,7 @@
 	var num_posts = 0;
 	var num_words = 0;
 	var num_tags = 0;
+	var calEvents = {};
 
 	{% if posts %}
 	{% for post in posts %}
@@ -255,34 +256,26 @@ function numberWithCommas(x) {
 				<script type="text/javascript">
 				var cal = new CalHeatMap();
 				var start_date, start_month, start_year, now_month, now_year, now;
-				//now = new Date();
-				now = new Date(2014, 1);
+				now = new Date();
 				now_year = now.getFullYear();
 				now_month = now.getMonth();
 				switch (now_month) {
+					case 0:
+					start_month = 10;
+					start_year = now_year - 1;
+					break;
+
 					case 1:
 					start_month = 11;
 					start_year = now_year - 1;
-					console.log("Year: "+start_year+", Month: "+start_month+", Now Month: "+now_month);
-					break;
-
-					case 2:
-					start_month = 12;
-					start_year = now_year - 1;
-					console.log("Year: "+start_year+", Month: "+start_month+", Now Month: "+now_month);
 					break;
 
 					default:
-					start_month = now_month - 1;
+					start_month = now_month - 2;
 					start_year = now_year;
-					console.log("Year: "+start_year+", Month: "+start_month+", Now Month: "+now_month);
 					break;
 				}
-				console.log("Start Year: "+start_year+", Start Month: "+start_month);
 				start_date = new Date(start_year, start_month);
-				console.log(start_date);
-				var test_date = new Date(2013, 11);
-				console.log(test_date);
 
 				cal.init({
 					itemSelector: "#cal-heatmap",
@@ -295,19 +288,7 @@ function numberWithCommas(x) {
 					displayLegend: false
 				});
 
-				$("#minDate-previous").on("click", function(e) {
-					e.preventDefault();
-					if (!cal.previous()) {
-						alert("No more domains to load");
-					}
-				});
-
-				$("#minDate-next").on("click", function(e) {
-					e.preventDefault();
-					if (!cal.next()) {
-						alert("No more domains to load");
-					}
-				});
+				
 				</script>
 			</header>
 
@@ -370,6 +351,17 @@ function numberWithCommas(x) {
 						<h2>{{ post.title }}</h2>
 						<p class="post-date">Published by {{ site.author }} on {{ post.created_at|format_date }}</p>
 					</header>
+					<div>
+						<div class="addthis_toolbox addthis_default_style addthis_16x16_style">
+							<a class="addthis_button_facebook"></a>
+							<a class="addthis_button_twitter"></a>
+							<a class="addthis_button_google_plusone_share"></a>
+							<a class="addthis_button_linkedin"></a>
+							<a class="addthis_button_buffer"></a>
+							<a class="addthis_button_email"></a>
+							<a class="addthis_button_compact"></a><a class="addthis_counter addthis_bubble_style"></a>
+						</div>
+					</div>
 					<section class="content">
 						{{ post.content }}
 						{% if post.tags %}
@@ -464,6 +456,10 @@ function numberWithCommas(x) {
 	})();
 	</script>
 	{% endif %}
+	<!-- AddThis Button BEGIN -->
+	<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5032ab3d5f43fff7"></script>
+	<!-- AddThis Button END -->
 
 </body>
 </html>
