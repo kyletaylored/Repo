@@ -319,6 +319,9 @@ hr {
   background: -o-linear-gradient(#e0e0e0, #dadada);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e0e0e0', endColorstr='#dadada', GradientType=0);
 }
+.post .article-footer {
+  overflow: auto;
+}
 .tags {
   -ms-box-sizing: border-box;
   -moz-box-sizing: border-box;
