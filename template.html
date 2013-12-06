@@ -425,7 +425,19 @@ function numberWithCommas(x) {
 				</article>
 				{% elif is_page %}
 				<div class="post">
-					<h1>{{ page.title }}</h1>
+					<header class="title">
+						<h1>{{ page.title }}</h1>
+						
+						<div class="addthis_toolbox addthis_default_style addthis_16x16_style">
+							<a class="addthis_button_facebook"></a>
+							<a class="addthis_button_twitter"></a>
+							<a class="addthis_button_google_plusone_share"></a>
+							<a class="addthis_button_linkedin"></a>
+							<a class="addthis_button_buffer"></a>
+							<a class="addthis_button_email"></a>
+							<a class="addthis_button_compact"></a><a class="addthis_counter addthis_bubble_style"></a>
+						</div>
+					</header>
 					<hr />
 					{{ page.content }}
 				</div>
